@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "server"
+version = "0.1.0"
+description = "Image Filter and Resize Service"
+authors = ["seilylook <seilylook@naver.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.12"
+uvicorn = "^0.34.0"
+pydantic = "^2.10.6"
+python-multipart = "^0.0.20"
+elasticsearch = "^8.17.2"
+opencv-python = "^4.11.0.86"
+numpy = "^2.2.4"
+pillow = "^11.1.0"
+pyspark = "^3.5.5"
+scikit-image = "^0.25.2"
+python-dotenv = "^1.0.1"
+pyyaml = "^6.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+pytest = "^8.3.5"
+isort = "^6.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
