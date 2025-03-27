@@ -19,6 +19,11 @@ pyspark = "^3.5.5"
 scikit-image = "^0.25.2"
 python-dotenv = "^1.0.1"
 pyyaml = "^6.0.2"
+confluent-kafka = "^2.8.2"
+minio = "^7.2.15"
+opencv-python-headless = "^4.11.0.86"
+redis = "^5.2.1"
+pydantic-settings = "^2.8.1"
 
 
 [tool.poetry.group.dev.dependencies]

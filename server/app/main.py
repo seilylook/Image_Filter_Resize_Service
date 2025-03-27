@@ -1,25 +1,35 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-import logging
+from fastapi.responses import JSONResponse
+import time
+import uuid
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from app.api.endpoints import health, images
+from app.api.middlewares.logging import LoggingMiddleware
+from app.core.config import settings
+from app.core.exceptions import (
+    ImageProcessingException,
+    StorageException,
+    KafkaException,
+)
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 app = FastAPI(
-    title="실시간 이미지 크기 조정 및 필터링 서비스",
-    description="업로드된 이미지를 실시간으로 다양한 크기로 조정하고 필터를 적용하는 스트리밍 서비스",
+    title=settings.PROJECT_NAME,
+    description="이미지 크기 조정 및 필터링 API",
+    version="0.1.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_prefix="/openapi.json",
 )
 
+# CORS 미들웨어 설정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[origin for origin in settings.BACKEND_CORS_ORIGINS],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
